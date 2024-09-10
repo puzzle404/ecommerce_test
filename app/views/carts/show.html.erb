@@ -1,0 +1,47 @@
+<div class="bg-white">
+  <div class="h-full mx-auto w-2/3 flex flex-col bg-white">
+    <div class="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
+      <div class="flex items-start justify-between">
+        <h2 class="text-2xl font-medium text-gray-900" id="slide-over-title">
+          Shopping cart
+        </h2>
+      </div>
+
+      <div class="mt-8">
+        <div class="flow-root">
+          <% if @cart.empty? %>
+                <p class="text-lg font-semi-bold px-8"> Your cart is empty! </p>
+                <p class="text-sm text-gray-700 px-8">
+                  <%= link_to "You can add some products here", root_path %>
+                </p>
+          <% else %>
+            <ul role="list" class="-my-6 divide-y divide-gray-200">
+              <%= render partial: "carts/item", collection: @cart.items %>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-200 py-6 px-4 sm:px-6">
+      <div class="flex justify-between text-base font-medium text-gray-900">
+        <p>Subtotal</p>
+        <p><%= to_currency @cart.total %></p>
+      </div>
+      <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+      <div class="mt-6">
+        <%= link_to new_order_path, class: "flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" do %>
+          Checkout
+        <% end %>
+      </div>
+      <div class="mt-6 flex justify-center text-sm text-center text-gray-500">
+        <p>
+          or
+          <%= link_to root_path, class: "text-indigo-600 font-medium hover:text-indigo-500" do %>
+            Continue Shopping <span aria-hidden="true"> &rarr;</span>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

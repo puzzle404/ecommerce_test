@@ -1,0 +1,24 @@
+
+services:
+  db:
+    environment:
+      - POSTGRES_PASSWORD=password
+    image: postgres:13
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+  web:
+    build: .
+    depends_on:
+      - db
+    environment:
+      - BUNDLE_PATH=/bundle/vendor
+      - DB_URL="postgres://postgres:password@db:5432/byebuy_${RAILS_ENV}"
+    ports:
+      - 3000:3000
+    volumes:
+      - bundler-data:/bundle
+      - .:/app
+
+volumes:
+  bundler-data:
+  postgresql-data:

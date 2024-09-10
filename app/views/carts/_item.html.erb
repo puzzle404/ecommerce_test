@@ -1,0 +1,31 @@
+<li class="py-6 flex">
+  <div class="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
+    <img src="<%= item.product.image %>" alt="<%= item.product.name %> class="w-full h-full object-center object-cover">
+  </div>
+
+  <div class="ml-4 flex-1 flex flex-col">
+    <div>
+      <div class="flex justify-between text-base font-medium text-gray-900">
+        <h3>
+          <a href="#">
+            <%= item.product.name %>
+          </a>
+        </h3>
+        <p class="ml-4">
+          <%= to_currency(item.product.price) %>
+        </p>
+      </div>
+    </div>
+    <div class="flex-1 flex items-end justify-between text-sm">
+      <p class="text-gray-500">
+        x <%= item.count %>
+      </p>
+
+      <div class="flex">
+        <%= link_to cart_path, data: { method: :delete, params: {product_id: item.product.id } }, class: "font-medium text-indigo-600 hover:text-indigo-500" do %>
+          Remove
+        <% end %>
+      </div>
+    </div>
+  </div>
+</li>
