@@ -24,10 +24,36 @@
     </div>
 
     <div class="border-t border-gray-200 py-6 px-4 sm:px-6">
-      <div class="flex justify-between text-base font-medium text-gray-900">
-        <p>Subtotal</p>
-        <p><%= to_currency @cart.total %></p>
+      <div class="p-4 bg-white rounded shadow-md">
+        <!-- Subtotal -->
+        <div class="flex justify-between text-base font-medium text-gray-900 border-b pb-2 mb-2">
+          <p>Subtotal</p>
+          <p><%= to_currency(@cart.total) %></p>
+        </div>
+
+        <!-- Descuentos -->
+        <div class="flex justify-between text-base font-medium text-gray-900 border-b pb-2 mb-2">
+          <p>Discounts</p>
+          <p>-<%= to_currency(@total_discounts) %></p>
+        </div>
+
+        <!-- Detalles de Descuentos -->
+        <div class="mb-4">
+          <% @discount_details.each do |disc_detail| %>
+            <div class="flex justify-between text-sm text-gray-700">
+              <p><%= disc_detail[:description] %></p>
+              <p>-<%= to_currency(disc_detail[:amount]) %></p>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Total Final -->
+        <div class="flex justify-between text-xl font-bold text-gray-900">
+          <p>Total</p>
+          <p><%= to_currency(@cart.total - @total_discounts) %></p>
+        </div>
       </div>
+
       <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
       <div class="mt-6">
         <%= link_to new_order_path, class: "flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" do %>
