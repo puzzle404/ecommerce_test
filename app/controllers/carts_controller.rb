@@ -1,5 +1,8 @@
 class CartsController < ApplicationController
   def show
+    discount_service = DiscountService.new(@cart)
+    @total_discounts = discount_service.calculate_discounts[:total_discount]
+    @discount_details = discount_service.calculate_discounts[:discount_details]
   end
 
   def update
