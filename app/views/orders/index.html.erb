@@ -1,0 +1,59 @@
+<div class="bg-gray-100 min-h-screen p-6">
+  <div class="container mx-auto">
+    <h1 class="text-3xl font-bold text-gray-900 mb-6">Orders</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% @orders.each do |order| %>
+        <div class="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between">
+          <div>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">Order Number: <%= order.id %></h2>
+            <p class="text-sm text-gray-500 mb-4">Created At: <%= order.created_at.strftime("%B %d, %Y") %></p>
+
+            <!-- Items de la Orden -->
+            <div class="mb-4">
+              <h3 class="text-lg font-bold text-gray-900">Items:</h3>
+              <ul class="list-disc list-inside text-gray-700">
+                <% order.order_items.each do |item| %>
+                  <li>
+                    <%= item.product.name %> - £<%= (item.price / 100.0).round(2) %> x <%= item.quantity %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+
+            <!-- Detalles de Descuentos -->
+            <% if order.order_discounts.any? %>
+              <div class="mb-4">
+                <h3 class="text-lg font-bold text-gray-900">Discounts:</h3>
+                <ul class="list-disc list-inside text-gray-700">
+                  <% order.order_discounts.each do |discount| %>
+                    <li>
+                      <%= discount.description %> - -£<%= (discount.amount / 100.0).round(2) %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- Totales de la Orden -->
+          <div class="mt-4">
+            <div class="flex justify-between text-base font-medium text-gray-900 border-t pt-2">
+              <span>Subtotal:</span>
+              <span>£<%= (order.total_without_discounts / 100.0).round(2) %></span>
+            </div>
+            <div class="flex justify-between text-base font-medium text-gray-900">
+              <span>Total:</span>
+              <span>£<%= (order.total_with_discounts / 100.0).round(2) %></span>
+            </div>
+          </div>
+
+          <!-- Botón de Acción -->
+          <div class="mt-4">
+            <%= link_to "View Order", order_path(order), class: "block text-center bg-indigo-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-indigo-700" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

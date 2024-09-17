@@ -3,5 +3,5 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import mrujs from "mrujs";
 
-window.Turbo = Turbo;
+// window.Turbo = Turbo;
 mrujs.start();

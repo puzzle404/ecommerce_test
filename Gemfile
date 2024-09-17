@@ -13,7 +13,7 @@ gem "tailwindcss-rails"
 gem "redis", "~> 4.0"
 gem "bootsnap", require: false
 
-gem "devise", "~> 4.8"
+gem "devise", "~> 4.9.4"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

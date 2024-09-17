@@ -1,0 +1,64 @@
+<div class="bg-white">
+  <div class="h-full mx-auto w-2/3 flex flex-col bg-white">
+    <div class="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
+      <div class="flex items-start justify-between">
+        <h2 class="text-2xl font-medium text-gray-900">Order Confirmation</h2>
+      </div>
+
+      <div class="mt-8">
+        <p class="text-lg font-semibold">Order Number: <%= @order.id %></p>
+        <div class="p-4 bg-white rounded shadow-md">
+          <!-- Items de la Orden -->
+          <div class="border-b pb-2">
+
+            <h3 class="text-xl font-bold text-gray-900">Items</h3>
+            <ul role="list" class="divide-gray-200 pb-2">
+              <% @order.order_items.each do |item| %>
+                <li class="pt-3 pb-2 flex">
+                  <div class="ml-4 flex flex-1 flex-col">
+                    <div class="flex justify-between text-sm text-gray-700">
+                      <h3><%= item.product.name %></h3>
+                      <p class="ml-4">£<%= (item.price / 100.0).round(2) %> x <%= item.quantity %></p>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <!-- Totales de la Orden -->
+          <div class="flex justify-between text-base font-medium text-gray-900 border-b pt-2 pb-2 mb-2">
+             <h3 class="text-xl font-bold text-gray-900">Subtotal</h3>
+            <p>£<%= (@order.total_without_discounts / 100.0).round(2) %></p>
+          </div>
+          <!-- Detalles de Descuentos -->
+          <h3 class="text-xl font-bold text-gray-900 mt-4">Discounts</h3>
+          <ul class="list-disc pl-5 mb-4">
+            <% @order.order_discounts.each do |discount| %>
+              <li class="flex justify-between text-sm text-gray-700">
+                <span><%= discount.description %></span>
+                <span>-£<%= (discount.amount / 100.0).round(2) %></span>
+              </li>
+            <% end %>
+          </ul>
+          <!-- Total Final -->
+          <div class="flex justify-between text-2xl font-bold text-indigo-700 border-t pt-4">
+            <p>Total:</p>
+            <p>£<%= (@order.total_with_discounts / 100.0).round(2) %></p>
+          </div>
+          
+          
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Opciones de Acción -->
+    <div class="border-t border-gray-200 py-6 px-4 sm:px-6">
+      <div class="mt-6">
+        <%= link_to "#", class: "flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700", onclick: "event.preventDefault();" do %>
+          Finish Order
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

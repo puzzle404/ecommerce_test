@@ -39,7 +39,7 @@ class DiscountService
     # Precio reducido de $655 por guitarra
     discount_per_guitar = (guitar_item.product.price - 65500)
     discount = guitar_item.count * discount_per_guitar
-    discount_details << { description: "Price drop to $655 for 2 or more Guitars", amount: discount }
+    discount_details << { description: "Price of each guitar drop to $655 for 2 or more Guitars", amount: discount }
     discount
   end
 

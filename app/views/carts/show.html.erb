@@ -56,7 +56,7 @@
 
       <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
       <div class="mt-6">
-        <%= link_to new_order_path, class: "flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" do %>
+        <%= button_to orders_path, method: :post, class: "flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700" do %>
           Checkout
         <% end %>
       </div>
